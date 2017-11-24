@@ -9,10 +9,10 @@ use \Zend\Json\Expr;
 class JsConfigRenderer extends Encoder
 {
 
-    public static function encode($value, $cycleCheck = false, $options = array())
+    public static function encode($value, $cycleCheck = false, array $options = array())
     {
         if(empty($value)) {
-            return;
+            return '';
         }
         	
         $encoder = new self(($cycleCheck) ? true : false, $options);

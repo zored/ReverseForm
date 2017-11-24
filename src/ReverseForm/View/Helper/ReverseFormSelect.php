@@ -10,6 +10,7 @@
 
 namespace ReverseForm\View\Helper;
 
+use Zend\Form\Element\Select;
 use Zend\Form\View\Helper\FormSelect;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
