@@ -27,7 +27,7 @@ Installation with Composer
 1. Add this project in your `composer.json`:
 ```json
     "require": {
-        "silvester/reverse-form": "dev-master",
+        "zored/reverse-form": "0.1",
     }
 ```
 

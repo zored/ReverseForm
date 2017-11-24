@@ -1,127 +1,139 @@
 <?php
 
-return array(
+use ReverseForm\Element\TinyMce;
+use ReverseForm\Element\CodeMirror;
+use ReverseForm\Element\JqueryUiSpinner;
+use ReverseForm\Element\JqueryUiDatetimepicker;
+use ReverseForm\Element\BootstrapDatepicker;
+use ReverseForm\Element\JqueryUiDateRangePicker;
+use ReverseForm\Element\JqueryUiDatepicker;
+use ReverseForm\Element\GoogleMap;
+use ReverseForm\Renderer\Uniform;
+use ReverseForm\Element\ChosenSelect;
+use ReverseForm\Compat\ZF3LocatorAwareFactory;
+use ReverseForm\View\Helper\CaptchaInputs;
+use ReverseForm\View\Helper\FormRendererFactory;
+use ReverseForm\View\Helper\ReverseFormSelect;
+use ReverseForm\View\Helper\Slugify;
 
-    'view_helpers' => array(
-        'invokables' => array(
-            'slugify' => 'ReverseForm\View\Helper\Slugify',
-            'reverseFormSelect' => 'ReverseForm\View\Helper\ReverseFormSelect',
-            'captchaInputs' => 'ReverseForm\View\Helper\CaptchaInputs',
-        ),
-        'factories' => array(
-            'formRenderer' => function ($sm) {
-                $me = new \ReverseForm\View\Helper\FormRenderer;
-                $me->serviceManager = $sm;
-                return $me;
-            }
-        )
-    ),
+return [
 
-    'view_manager' => array(
-        'template_path_stack' => array(
+    'view_helpers' => [
+        'invokables' => [
+            'slugify' => Slugify::class,
+            'reverseFormSelect' => ReverseFormSelect::class,
+            'captchaInputs' => CaptchaInputs::class,
+        ],
+        'factories' => [
+            'formRenderer' => FormRendererFactory::class
+        ]
+    ],
+
+    'view_manager' => [
+        'template_path_stack' => [
             'ReverseFormElements' => __DIR__ . '/../view/element',
-        ),
-    ),
+        ],
+    ],
 
-    'reverse_form' => array(
+    'reverse_form' => [
 
-        'settings' => array(
+        'settings' => [
             'jsPlaceholderName' => 'reverse-js-placeholder'
-        ),
+        ],
 
-        'ReverseForm\Renderer\Uniform' => array(
-            'css' => array(
+        Uniform::class => [
+            'css' => [
                 '/vendor/uni-form/css/uni-form.css',
                 '/vendor/uni-form/css/default.uni-form.css'
-            )
-        ),
+            ]
+        ],
 
-        'ReverseForm\Element\GoogleMap' => array(
-            'js' => array(
+        GoogleMap::class => [
+            'js' => [
                 'https://maps.google.com/maps/api/js?sensor=false&region=SI'
-            ),
+            ],
             'template' => 'googlemap.phtml',
             'inlineJs' => "var map = new google.maps.Map(document.getElementById('%1\$s'), %2\$s);\n$('#%1\$s').data('map', map);\n",
-            'inlineJsConfig' => array(
+            'inlineJsConfig' => [
                 'zoom' 		=>  8,
                 'mapTypeId'	=> new \Zend\Json\Expr('google.maps.MapTypeId.ROADMAP'),
                 'center'	=> new \Zend\Json\Expr('new google.maps.LatLng(46.15, 14.9)')
-            )
-        ),
+            ]
+        ],
 
-        'ReverseForm\Element\JqueryUiDatepicker' => array(
-            'js' => array(
+        JqueryUiDatepicker::class => [
+            'js' => [
                 '/vendor/jquery-ui/dist/minified/jquery.ui.core.min.js',
                 '/vendor/jquery-ui/dist/minified/jquery.ui.datepicker.min.js'
-            ),
-            'css' => array(
+            ],
+            'css' => [
                 '/vendor/jquery-ui/dist/jquery-ui.css'
-            ),
+            ],
             'template' => 'input.phtml',
             'inlineJs' => "$('#%1\$s').datepicker(%2\$s);\n"
-        ),
+        ],
 
-        'ReverseForm\Element\JqueryUiDateRangePicker' => array(
-            'js' => array(
+        JqueryUiDateRangePicker::class => [
+            'js' => [
                 '/vendor/jquery-ui/dist/minified/jquery.ui.core.min.js',
                 '/vendor/jquery-ui/dist/minified/jquery.ui.datepicker.min.js',
                 '/vendor/jQuery-UI-Date-Range-Picker/js/daterangepicker.jQuery.compressed.js'
-            ),
-            'css' => array(
+            ],
+            'css' => [
                 '/vendor/jquery-ui/dist/jquery-ui.css',
                 '/vendor/jQuery-UI-Date-Range-Picker/css/ui.daterangepicker.css'
-            ),
+            ],
             'template' => 'input.phtml',
             'inlineJs' => "$('#%1\$s').daterangepicker(%2\$s);\n"
-        ),
+        ],
 
-        'ReverseForm\Element\BootstrapDatepicker' => array(
-            'js' => array(
+        BootstrapDatepicker::class => [
+            'js' => [
                 '/vendor/datepicker/js/bootstrap-datepicker.js'
-            ),
-            'css' => array(
+            ],
+            'css' => [
                 '/vendor/datepicker/css/datepicker.css'
-            ),
+            ],
             'template' => 'input.phtml',
             'inlineJs' => "$('#%1\$s').datepicker(%2\$s);",
-            'inlineJsConfig' => array(
+            'inlineJsConfig' => [
                 'format'	=> 'dd.mm.yyyy',
                 'weekstart'	=> new \Zend\Json\Expr(1),
-            )
-        ),
+            ]
+        ],
 
-        'ReverseForm\Element\JqueryUiDatetimepicker' => array(
-            'js' => array(
+        JqueryUiDatetimepicker::class => [
+            'js' => [
                 '/vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.js',
                 '/vendor/jquery-ui/dist/minified/jquery.ui.widget.min.js',
                 '/vendor/jquery-ui/dist/minified/jquery.ui.mouse.min.js',
                 '/vendor/jquery-ui/dist/minified/jquery.ui.slider.min.js'
-            ),
-            'css' => array(
+            ],
+            'css' => [
                 '/vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.css'
-            ),
+            ],
             'template' => 'input.phtml',
             'inlineJs' => "$('#%1\$s').datetimepicker(%2\$s);\n",
-            'inlineJsConfig' => array(
+            'inlineJsConfig' => [
                 'closeText' 	=> 'Zapri',
                 'currentText'	=> 'Zdaj',
                 'hourText'		=> 'Ura',
                 'minuteText'	=> 'Minuta'
-            )
-        ),
+            ]
+        ],
         
-        'ReverseForm\Element\JqueryUiSpinner' => array(
-            'js' => array(
+        JqueryUiSpinner::class => [
+            'js' => [
                 '/vendor/jquery.ui.spinner/ui.spinner.js',
                 '/vendor/jquery-ui/dist/minified/jquery.ui.widget.min.js',
                 '/vendor/jquery-ui/dist/minified/jquery.ui.position.min.js',
                 '/vendor/jquery-ui/dist/minified/jquery.ui.button.min.js',
                 '/vendor/jquery-ui/dist/minified/jquery.ui.mouse.min.js',
                 '/vendor/jquery-ui/dist/minified/jquery.ui.slider.min.js'
-            ),
-            'css' => array(
+            ],
+            'css' => [
                 '/vendor/jquery.ui.spinner/ui.spinner.css'
-            ),
+            ],
             'template' => 'input.phtml',
             'inlineJs' => "$('#%1\$s').spinner(%2\$s);\n",
             /*
@@ -148,37 +160,37 @@ return array(
                 'parse'	    => ''
             )
             */
-        ),
+        ],
         
-        'ReverseForm\Element\ChosenSelect' => array(
-        	'js' => array(
+        ChosenSelect::class => [
+        	'js' => [
         		'/vendor/chosen/chosen/chosen.jquery.min.js'
-        	),
-        	'css' => array(
+            ],
+        	'css' => [
         		'/vendor/chosen/chosen/chosen.css'
-        	),
+            ],
         	'template' => 'select.phtml',
         	'inlineJs' => "$('#%1\$s').chosen(%2\$s);\n",
-        	'inlineJsConfig' => array(
+        	'inlineJsConfig' => [
         		'no_results_text' => 'No results matched !!!'
-        	)
-        ),
+            ]
+        ],
         
-        'ReverseForm\Element\CodeMirror' => array(
-        	'js' => array(
+        CodeMirror::class => [
+        	'js' => [
         		'/vendor/CodeMirror/lib/codemirror.js',
         	    '/vendor/CodeMirror/mode/xml/xml.js',
         	    '/vendor/CodeMirror/mode/javascript/javascript.js',
         	    '/vendor/CodeMirror/mode/css/css.js',
         	    '/vendor/CodeMirror/mode/clike/clike.js',
         	    '/vendor/CodeMirror/mode/php/php.js'
-        	),
-        	'css' => array(
+            ],
+        	'css' => [
         		'/vendor/CodeMirror/lib/codemirror.css'
-        	),
+            ],
         	'template' => 'textarea.phtml',
         	'inlineJs' => "var %1\$s = CodeMirror.fromTextArea(document.getElementById('%1\$s'), %2\$s);\n",
-        	'inlineJsConfig' => array(
+        	'inlineJsConfig' => [
         		'lineNumbers'    => true,
         	    'matchBrackets'  => true,
         	    'mode'           => new \Zend\Json\Expr('"application/x-httpd-php"'),
@@ -186,17 +198,17 @@ return array(
         	    'indentWithTabs' => true,
         	    'enterMode'      => 'keep',
         	    'tabMode'        => 'shift'
-        	)
-        ),
+            ]
+        ],
         
-        'ReverseForm\Element\TinyMce' => array(
-        	'js' => array(
+        TinyMce::class => [
+        	'js' => [
         		'/vendor/tinymce/jscripts/tiny_mce/jquery.tinymce.js'
-        	),
-        	'css' => array(),
+            ],
+        	'css' => [],
         	'template' => 'textarea.phtml',
         	'inlineJs' => "$('#%1\$s').tinymce(%2\$s)\n",
-        	'inlineJsConfig' => array(
+        	'inlineJsConfig' => [
         		'script_url'     => new \Zend\Json\Expr('"/vendor/tinymce/jscripts/tiny_mce/tiny_mce_jquery.js"'),
         		'theme'          => 'advanced',
                 'skin'           => 'o2k7',
@@ -215,14 +227,14 @@ return array(
         	    'external_link_list_url' => "lists/link_list.js",
         	    'external_image_list_url' => "lists/image_list.js",
         	    'media_external_list_url' => "lists/media_list.js"
-        	)
-        ),
+            ]
+        ],
 
-    ),
-    'service_manager' => array(
-        'invokables' => array(
-            'renderer.uniform' => 'ReverseForm\Renderer\Uniform',
-            'renderer.bootstrap' => 'ReverseForm\Renderer\Bootstrap',
-        )
-    ),
-);
+    ],
+    'service_manager' => [
+        'factories' => [
+            'renderer.uniform' => ZF3LocatorAwareFactory::class,
+            'renderer.bootstrap' => ZF3LocatorAwareFactory::class,
+        ]
+    ],
+];

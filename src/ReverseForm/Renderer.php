@@ -7,11 +7,10 @@ use Zend\Form\View\Helper\FormElement;
 use Zend\Form\View\Helper\FormLabel;
 use Zend\Form\View\Helper\FormElementErrors;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\View\Helper\EscapeHtml;
 use Zend\View\Helper\EscapeHtmlAttr;
 
-class Renderer implements ServiceManagerAwareInterface
+class Renderer
 {
 
     public $view = false;

@@ -1,10 +1,10 @@
 {
-    "name": "silvester/reverse-form",
-    "description": "Rendering ZF2 forms with viewscripts. It can be extended to render with other frameworks then Twitter Bootstrap.",
+    "name": "zored/reverse-form",
+    "description": "Rendering ZF3 forms with viewscripts. It can be extended to render with other frameworks then Twitter Bootstrap.",
     "minimum-stability": "dev",
     "type" : "module",
     "homepage" : "https://github.com/silvester/ReverseForm",
-    "keywords" : ["form", "zf2", "module", "uniForm"],
+    "keywords" : ["form", "zf3", "module", "uniForm"],
     "license" : "MIT",
     "authors": [
         {
@@ -14,8 +14,8 @@
         }
     ],
     "require": {
-		"php": ">=5.3.3",
-        "zendframework/zendframework": "2.*"
+		"php": ">=7.1",
+        "zendframework/zendframework": ">=3.0"
     },
     "autoload": {
         "psr-0": {

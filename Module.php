@@ -3,16 +3,18 @@
 namespace ReverseForm;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\Loader\ClassMapAutoloader;
+use Zend\Loader\StandardAutoloader;
 
 class Module implements AutoloaderProviderInterface  
 {
     public function getAutoloaderConfig()
     {
         return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+            ClassMapAutoloader::class => array(
                 __DIR__ . '/autoload_classmap.php',
             ),
-            'Zend\Loader\StandardAutoloader' => array(
+            StandardAutoloader::class => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
